@@ -1,3 +1,3 @@
 # Website
 
-This is my personal portfolio website. It contains a blog and some information about me.
+This is my personal portfolio website. It contains some information about me and a contact form. It will contain a blog soon.
