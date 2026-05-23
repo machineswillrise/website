@@ -16,15 +16,19 @@ import io.github.machineswillrise.website.context.RequestContext;
 public class Dispatcher implements HttpHandler {
 	private static final Logger LOG = Logger.getLogger(Dispatcher.class.getName());
 
-	private final Map<String, RouteAction> routes = new HashMap<>();
+	private final Map<String, Map<String, RouteAction>> routes = new HashMap<>();
 	private final Semaphore rateLimiter;
 
 	public Dispatcher(int rateLimit) {
 		this.rateLimiter = new Semaphore(rateLimit);
 	}
 
+	public void register(String method, String path, RouteAction action) {
+		routes.computeIfAbsent(method, k -> new HashMap<>()).put(path, action);
+	}
+
 	public void register(String path, RouteAction action) {
-		routes.put(path, action);
+		register("GET", path, action);
 	}
 
 	private void sendErrorResponse(HttpExchange exchange, int status, String ip, String msg) throws IOException {
@@ -47,8 +51,16 @@ public class Dispatcher implements HttpHandler {
 		}
 
 		try {
+			var method = exchange.getRequestMethod();
 			var path = exchange.getRequestURI().getPath();
-			var action = routes.get(path);
+			var methodRoutes = routes.get(method);
+			
+			if (methodRoutes == null) {
+				sendErrorResponse(exchange, 405, ip, "405 Method Not Allowed");
+				return;
+			}
+
+			var action = methodRoutes.get(path);
 
 			if (action == null) {
 				sendErrorResponse(exchange, 404, ip, "404 Not Found");

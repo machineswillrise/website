@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -59,6 +60,12 @@ public class RequestContext {
 		exchange.sendResponseHeaders(statusCode, bytes.length);
 		try (var os = exchange.getResponseBody()) {
 			os.write(bytes);
+		}
+	}
+
+	public String getBody() throws IOException {
+		try (var is = exchange.getRequestBody()) {
+			return new String(is.readAllBytes(), StandardCharsets.UTF_8);
 		}
 	}
 }

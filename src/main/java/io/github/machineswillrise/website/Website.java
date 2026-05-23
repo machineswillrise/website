@@ -40,7 +40,7 @@ public class Website {
 		var context = new AppContext();
 		var dispatcher = context.dispatcher;
 
-		dispatcher.register("/health", ctx -> ctx.respond(200, "OK"));
+		dispatcher.register("GET","/health", ctx -> ctx.respond(200, "OK"));
 
 		var port = new InetSocketAddress(context.PORT);
 		var server = HttpServer.create(port, 0);
