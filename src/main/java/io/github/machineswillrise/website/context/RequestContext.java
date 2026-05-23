@@ -17,6 +17,7 @@ import com.sun.net.httpserver.HttpExchange;
 public class RequestContext {
 	private final HttpExchange exchange;
 	private final Map<String, Set<String>> parameters;
+	private Map<String, Set<String>> bodyParameters;
 
 	public RequestContext(HttpExchange exchange) {
 		this.exchange = exchange;
@@ -67,5 +68,21 @@ public class RequestContext {
 		try (var is = exchange.getRequestBody()) {
 			return new String(is.readAllBytes(), StandardCharsets.UTF_8);
 		}
+	}
+
+	private Map<String, Set<String>> parseBody() throws IOException {
+		var body = getBody();
+		return parseQuery(body);
+	}
+
+	public String getBodyParam(String key, String defaultValue) throws IOException {
+		if (bodyParameters == null) {
+			bodyParameters = parseBody();
+		}
+		var values = bodyParameters.get(key);
+		if (values != null && !values.isEmpty()) {
+			return values.iterator().next();
+		}
+		return defaultValue;
 	}
 }

@@ -6,12 +6,15 @@ import java.util.logging.StreamHandler;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
+
 import java.net.InetSocketAddress;
 import java.io.IOException;
 
 import com.sun.net.httpserver.HttpServer;
+import com.sun.net.httpserver.HttpHandler;
 
 import io.github.machineswillrise.website.context.AppContext;
+import io.github.machineswillrise.website.routing.ClasspathStaticHandler;
 
 public class Website {
 	private static final Logger LOG = Logger.getLogger(Website.class.getName());
@@ -41,12 +44,23 @@ public class Website {
 		var dispatcher = context.dispatcher;
 
 		dispatcher.register("GET","/health", ctx -> ctx.respond(200, "OK"));
+		dispatcher.register("POST", "/contact", ctx -> {
+			var name = ctx.getBodyParam("name", "");
+			var email = ctx.getBodyParam("email", "");
+			var message = ctx.getBodyParam("message", "");
+
+			var ntfyMessage = String.format("Contact form submission from %s (%s): %s", name, email, message);
+			context.ntfyService.sendNotification(ntfyMessage);
+
+			ctx.respond(200, "Message sent successfully!");
+		});
 
 		var port = new InetSocketAddress(context.PORT);
 		var server = HttpServer.create(port, 0);
-		
+		var staticHandler = new ClasspathStaticHandler("/index.html");
+
 		server.setExecutor(Executors.newCachedThreadPool());
-		server.createContext("/", dispatcher);
+		server.createContext("/", staticHandler.create(dispatcher));
 		server.start();
 	}
 }
