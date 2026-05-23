@@ -1,8 +1,6 @@
 package io.github.machineswillrise.website.routing;
 
 import java.io.IOException;
-import java.io.OutputStream;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
@@ -10,8 +8,6 @@ import java.util.logging.Logger;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-
-import io.github.machineswillrise.website.context.RequestContext;
 
 public class Dispatcher implements HttpHandler {
 	private static final Logger LOG = Logger.getLogger(Dispatcher.class.getName());
@@ -45,7 +41,7 @@ public class Dispatcher implements HttpHandler {
 		String ip = exchange.getRemoteAddress().getAddress().getHostAddress();
 
 		if (!rateLimiter.tryAcquire()) {
-			LOG.warning("Rate limit exceeded for " + ip);
+			LOG.warning(() -> "Rate limit exceeded for " + ip);
 			sendErrorResponse(exchange, 429, ip, "429 Too Many Requests");
 			return;
 		}
@@ -71,12 +67,11 @@ public class Dispatcher implements HttpHandler {
 			action.execute(context);
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			sendErrorResponse(exchange, 500, ip, "500 Internal Server Error");
 		} finally {
 			rateLimiter.release();
 		}
 
-		LOG.info("Request handled for " + ip);
+		LOG.info(() -> "Request handled for " + ip);
 	}
 }

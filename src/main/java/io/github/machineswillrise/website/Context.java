@@ -1,11 +1,11 @@
-package io.github.machineswillrise.website.context;
+package io.github.machineswillrise.website;
 
 import java.net.http.HttpClient;
 
-import io.github.machineswillrise.website.service.NtfyService;
 import io.github.machineswillrise.website.routing.Dispatcher;
+import io.github.machineswillrise.website.service.NtfyService;
 
-public class AppContext {
+public class Context {
 	// environment variables
 	public final int PORT;
 	private final int RATE_LIMIT; // per minute per IP
@@ -20,7 +20,7 @@ public class AppContext {
 	// actual services
 	public final NtfyService ntfyService;
 
-	public AppContext() {
+	public Context() {
 		String port = getRequiredEnv("WEBSITE_PORT");
 		String rateLimit = getRequiredEnv("WEBSITE_RATE_LIMIT");
 		String ntfyUrl = getRequiredEnv("WEBSITE_NTFY_URL");

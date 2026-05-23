@@ -1,19 +1,16 @@
 package io.github.machineswillrise.website;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
-import java.util.logging.Logger;
-import java.util.logging.StreamHandler;
-import java.util.logging.SimpleFormatter;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
-
-import java.net.InetSocketAddress;
-import java.io.IOException;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.StreamHandler;
 
 import com.sun.net.httpserver.HttpServer;
-import com.sun.net.httpserver.HttpHandler;
 
-import io.github.machineswillrise.website.context.AppContext;
 import io.github.machineswillrise.website.routing.ClasspathStaticHandler;
 
 public class Website {
@@ -40,7 +37,7 @@ public class Website {
 	public static void main(String[] args) throws IOException {
 		configureLogging();
 
-		var context = new AppContext();
+		var context = new Context();
 		var dispatcher = context.dispatcher;
 
 		dispatcher.register("GET","/health", ctx -> ctx.respond(200, "OK"));
@@ -62,5 +59,6 @@ public class Website {
 		server.setExecutor(Executors.newCachedThreadPool());
 		server.createContext("/", staticHandler.create(dispatcher));
 		server.start();
+		LOG.info(() -> "Server started on port " + context.PORT);
 	}
 }

@@ -1,4 +1,4 @@
-package io.github.machineswillrise.website.context;
+package io.github.machineswillrise.website.routing;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.HashSet;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
