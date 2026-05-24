@@ -1,7 +1,10 @@
 package io.github.machineswillrise.website;
 
 import java.net.http.HttpClient;
+import java.util.Locale;
 
+import freemarker.template.Configuration;
+import freemarker.template.TemplateExceptionHandler;
 import io.github.machineswillrise.website.routing.Dispatcher;
 import io.github.machineswillrise.website.service.NtfyService;
 
@@ -10,6 +13,9 @@ public class Context {
 	public final int PORT;
 	private final int RATE_LIMIT; // per minute per IP
 	private final String NTFY_URL;
+
+	// freemarker
+	private final Configuration freemarkerConfig;
 
 	// dependencies
 	private final HttpClient httpClient;
@@ -21,15 +27,17 @@ public class Context {
 	public final NtfyService ntfyService;
 
 	public Context() {
-		String port = getRequiredEnv("WEBSITE_PORT");
-		String rateLimit = getRequiredEnv("WEBSITE_RATE_LIMIT");
-		String ntfyUrl = getRequiredEnv("WEBSITE_NTFY_URL");
+		this.PORT = Integer.parseInt(getRequiredEnv("WEBSITE_PORT"));
+		this.RATE_LIMIT = Integer.parseInt(getRequiredEnv("WEBSITE_RATE_LIMIT"));
+		this.NTFY_URL = getRequiredEnv("WEBSITE_NTFY_URL");
 
-		this.PORT = Integer.parseInt(port);
-		this.RATE_LIMIT = Integer.parseInt(rateLimit);
-		this.NTFY_URL = ntfyUrl;
+		this.freemarkerConfig = new Configuration(Configuration.VERSION_2_3_32);
+		this.freemarkerConfig.setClassForTemplateLoading(Context.class, "/templates");
+		this.freemarkerConfig.setDefaultEncoding("UTF-8");
+		this.freemarkerConfig.setLocale(Locale.US);
+		this.freemarkerConfig.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
-		this.dispatcher = new Dispatcher(RATE_LIMIT);
+		this.dispatcher = new Dispatcher(RATE_LIMIT, freemarkerConfig);
 
 		this.httpClient = HttpClient.newHttpClient();
 

@@ -7,20 +7,28 @@ import java.util.Set;
 import java.util.HashSet;
 
 import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
 import com.sun.net.httpserver.HttpExchange;
 
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+
 public class RequestContext {
 	private final HttpExchange exchange;
 	private final Map<String, Set<String>> parameters;
 	private Map<String, Set<String>> bodyParameters;
+	private final Configuration freemarkerConfig;
 
-	public RequestContext(HttpExchange exchange) {
+	public RequestContext(HttpExchange exchange, Configuration freemarkerConfig) {
 		this.exchange = exchange;
 		this.parameters = parseQuery(exchange.getRequestURI().getQuery());
+		this.freemarkerConfig = freemarkerConfig;
 	}
 
 	private Map<String, Set<String>> parseQuery(String query) {
@@ -83,5 +91,12 @@ public class RequestContext {
 			return values.iterator().next();
 		}
 		return defaultValue;
+	}
+
+	public void renderTemplate(String templateName, Map<String, Object> data) throws IOException, TemplateException {
+		Template template = freemarkerConfig.getTemplate(templateName);
+		Writer out = new StringWriter();
+		template.process(data, out);
+		respond(200, out.toString());
 	}
 }

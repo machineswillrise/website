@@ -1,6 +1,7 @@
 package io.github.machineswillrise.website.routing;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
@@ -9,14 +10,19 @@ import java.util.logging.Logger;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+import freemarker.template.Configuration;
+import freemarker.template.TemplateException;
+
 public class Dispatcher implements HttpHandler {
 	private static final Logger LOG = Logger.getLogger(Dispatcher.class.getName());
 
 	private final Map<String, Map<String, RouteAction>> routes = new HashMap<>();
 	private final Semaphore rateLimiter;
+	private final Configuration freemarkerConfig;
 
-	public Dispatcher(int rateLimit) {
+	public Dispatcher(int rateLimit, Configuration freemarkerConfig) {
 		this.rateLimiter = new Semaphore(rateLimit);
+		this.freemarkerConfig = freemarkerConfig;
 	}
 
 	public void register(String method, String path, RouteAction action) {
@@ -33,6 +39,17 @@ public class Dispatcher implements HttpHandler {
 		exchange.sendResponseHeaders(status, error.length);
 		try (var os = exchange.getResponseBody()) {
 			os.write(error);
+		}
+	}
+
+	private void renderTemplate(HttpExchange exchange, String templateName, int status) throws IOException, TemplateException {
+		var template = freemarkerConfig.getTemplate(templateName);
+		var out = new StringWriter();
+		template.process(new HashMap<>(), out);
+		var bytes = out.toString().getBytes();
+		exchange.sendResponseHeaders(status, bytes.length);
+		try (var os = exchange.getResponseBody()) {
+			os.write(bytes);
 		}
 	}
 
@@ -59,11 +76,11 @@ public class Dispatcher implements HttpHandler {
 			var action = methodRoutes.get(path);
 
 			if (action == null) {
-				sendErrorResponse(exchange, 404, ip, "404 Not Found");
+				renderTemplate(exchange, "404.ftl", 404);
 				return;
 			}
 
-			var context = new RequestContext(exchange);
+			var context = new RequestContext(exchange, freemarkerConfig);
 			action.execute(context);
 
 		} catch (Exception e) {

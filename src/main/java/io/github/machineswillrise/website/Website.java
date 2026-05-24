@@ -2,6 +2,7 @@ package io.github.machineswillrise.website;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.HashMap;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
@@ -40,6 +41,7 @@ public class Website {
 		var context = new Context();
 		var dispatcher = context.dispatcher;
 
+		dispatcher.register("GET","/", ctx -> ctx.renderTemplate("index.ftl", new HashMap<>()));
 		dispatcher.register("GET","/health", ctx -> ctx.respond(200, "OK"));
 		dispatcher.register("POST", "/contact", ctx -> {
 			var name = ctx.getBodyParam("name", "");
@@ -49,16 +51,18 @@ public class Website {
 			var ntfyMessage = String.format("Contact form submission from %s (%s): %s", name, email, message);
 			context.ntfyService.sendNotification(ntfyMessage);
 
-			ctx.respond(200, "Message sent successfully!");
+			ctx.renderTemplate("success.ftl", new java.util.HashMap<>());
 		});
 
 		var port = new InetSocketAddress(context.PORT);
 		var server = HttpServer.create(port, 0);
-		var staticHandler = new ClasspathStaticHandler("/index.html");
-
 		server.setExecutor(Executors.newCachedThreadPool());
-		server.createContext("/", staticHandler.create(dispatcher));
+
+		var staticHandler = new ClasspathStaticHandler("/style.css");
+		server.createContext("/", dispatcher);
+		server.createContext("/style.css", staticHandler.create(dispatcher));
 		server.start();
+
 		LOG.info(() -> "Server started on port " + context.PORT);
 	}
 }
