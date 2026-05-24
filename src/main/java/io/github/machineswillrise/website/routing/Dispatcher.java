@@ -37,6 +37,7 @@ public class Dispatcher implements HttpHandler {
 		var logEntry = "[" + ip + "] " + msg;
 		var error = logEntry.getBytes();
 		exchange.sendResponseHeaders(status, error.length);
+
 		try (var os = exchange.getResponseBody()) {
 			os.write(error);
 		}
@@ -46,7 +47,9 @@ public class Dispatcher implements HttpHandler {
 		var template = freemarkerConfig.getTemplate(templateName);
 		var out = new StringWriter();
 		template.process(new HashMap<>(), out);
+
 		var bytes = out.toString().getBytes();
+
 		exchange.sendResponseHeaders(status, bytes.length);
 		try (var os = exchange.getResponseBody()) {
 			os.write(bytes);
