@@ -8,7 +8,7 @@
 	<h2>Links</h2>
 	<div class="links">
 		<a href="https://github.com/machineswillrise">GitHub</a>
-		<a href="https://news.ycombinator.com/user?id=machineswillrise">Hacker News</a>
+		<a href="https://news.ycombinator.com/user?id=onesingleblast">Hacker News</a>
 	</div>
 
 	<h2>Projects</h2>
