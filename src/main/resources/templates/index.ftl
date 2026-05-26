@@ -1,6 +1,6 @@
 <#include "base.ftl">
 
-<@base>
+<@base requestCount=requestCount>
 	<h1>Machines Will Rise</h1>
 	<p class="subtitle">Welcome to my personal portfolio website!</p>
 	<p>Feel free to explore my projects and contact me if you have any questions.</p>

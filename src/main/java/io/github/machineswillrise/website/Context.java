@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
+import io.github.machineswillrise.website.metrics.RequestCounter;
 import io.github.machineswillrise.website.routing.Dispatcher;
 import io.github.machineswillrise.website.service.NtfyService;
 
@@ -25,6 +26,7 @@ public class Context {
 
 	// actual services
 	public final NtfyService ntfyService;
+	public final RequestCounter requestCounter;
 
 	public Context() {
 		this.PORT = Integer.parseInt(getRequiredEnv("WEBSITE_PORT"));
@@ -37,7 +39,8 @@ public class Context {
 		this.freemarkerConfig.setLocale(Locale.US);
 		this.freemarkerConfig.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
-		this.dispatcher = new Dispatcher(RATE_LIMIT, freemarkerConfig);
+		this.requestCounter = new RequestCounter();
+		this.dispatcher = new Dispatcher(RATE_LIMIT, freemarkerConfig, requestCounter);
 
 		this.httpClient = HttpClient.newHttpClient();
 

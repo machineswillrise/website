@@ -18,17 +18,20 @@ import com.sun.net.httpserver.HttpExchange;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import io.github.machineswillrise.website.metrics.RequestCounter;
 
 public class RequestContext {
 	private final HttpExchange exchange;
 	private final Map<String, Set<String>> parameters;
 	private Map<String, Set<String>> bodyParameters;
 	private final Configuration freemarkerConfig;
+	private final RequestCounter requestCounter;
 
-	public RequestContext(HttpExchange exchange, Configuration freemarkerConfig) {
+	public RequestContext(HttpExchange exchange, Configuration freemarkerConfig, RequestCounter requestCounter) {
 		this.exchange = exchange;
 		this.parameters = parseQuery(exchange.getRequestURI().getQuery());
 		this.freemarkerConfig = freemarkerConfig;
+		this.requestCounter = requestCounter;
 	}
 
 	private Map<String, Set<String>> parseQuery(String query) {
@@ -96,7 +99,9 @@ public class RequestContext {
 	public void renderTemplate(String templateName, Map<String, Object> data) throws IOException, TemplateException {
 		Template template = freemarkerConfig.getTemplate(templateName);
 		Writer out = new StringWriter();
-		template.process(data, out);
+		var model = new HashMap<String, Object>(data);
+		model.put("requestCount", requestCounter.getRequestCount());
+		template.process(model, out);
 		respond(200, out.toString());
 	}
 }

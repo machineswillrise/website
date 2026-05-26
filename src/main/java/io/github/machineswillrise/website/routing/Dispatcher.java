@@ -12,6 +12,7 @@ import com.sun.net.httpserver.HttpHandler;
 
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
+import io.github.machineswillrise.website.metrics.RequestCounter;
 
 public class Dispatcher implements HttpHandler {
 	private static final Logger LOG = Logger.getLogger(Dispatcher.class.getName());
@@ -19,10 +20,12 @@ public class Dispatcher implements HttpHandler {
 	private final Map<String, Map<String, RouteAction>> routes = new HashMap<>();
 	private final Semaphore rateLimiter;
 	private final Configuration freemarkerConfig;
+	private final RequestCounter requestCounter;
 
-	public Dispatcher(int rateLimit, Configuration freemarkerConfig) {
+	public Dispatcher(int rateLimit, Configuration freemarkerConfig, RequestCounter requestCounter) {
 		this.rateLimiter = new Semaphore(rateLimit);
 		this.freemarkerConfig = freemarkerConfig;
+		this.requestCounter = requestCounter;
 	}
 
 	public void register(String method, String path, RouteAction action) {
@@ -46,7 +49,9 @@ public class Dispatcher implements HttpHandler {
 	private void renderTemplate(HttpExchange exchange, String templateName, int status) throws IOException, TemplateException {
 		var template = freemarkerConfig.getTemplate(templateName);
 		var out = new StringWriter();
-		template.process(new HashMap<>(), out);
+		var model = new HashMap<String, Object>();
+		model.put("requestCount", requestCounter.getRequestCount());
+		template.process(model, out);
 
 		var bytes = out.toString().getBytes();
 
@@ -58,6 +63,7 @@ public class Dispatcher implements HttpHandler {
 
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
+		requestCounter.recordRequest();
 		String ip = exchange.getRemoteAddress().getAddress().getHostAddress();
 
 		if (!rateLimiter.tryAcquire()) {
@@ -83,7 +89,7 @@ public class Dispatcher implements HttpHandler {
 				return;
 			}
 
-			var context = new RequestContext(exchange, freemarkerConfig);
+			var context = new RequestContext(exchange, freemarkerConfig, requestCounter);
 			action.execute(context);
 
 		} catch (Exception e) {
