@@ -36,6 +36,10 @@ public class Dispatcher implements HttpHandler {
 		register("GET", path, action);
 	}
 
+	public void shutdown() {
+		requestCounter.shutdown();
+	}
+
 	private void sendErrorResponse(HttpExchange exchange, int status, String ip, String msg) throws IOException {
 		var logEntry = "[" + ip + "] " + msg;
 		var error = logEntry.getBytes();

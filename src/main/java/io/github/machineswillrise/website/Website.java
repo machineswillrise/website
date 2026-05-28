@@ -63,6 +63,12 @@ public class Website {
 		server.createContext("/style.css", staticHandler.create(dispatcher));
 		server.start();
 
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			LOG.info("Shutting down...");
+			dispatcher.shutdown();
+			server.stop(0);
+		}));
+
 		LOG.info(() -> "Server started on port " + context.PORT);
 	}
 }
