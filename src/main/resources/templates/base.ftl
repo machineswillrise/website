@@ -10,7 +10,7 @@
 	<body>
 		<div class="container">
 			<#nested>
-			<p class="footer">Total requests served: ${requestCount}</p>
+			<p class="footer">Total requests served today: ${requestCount}</p>
 			<p class="footer">This website is proudly served with <span class="orange-text">plain Java</span> with no frameworks.</p>
 		</div>
 	</body>

@@ -13,6 +13,7 @@ import java.util.logging.StreamHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import io.github.machineswillrise.website.routing.ClasspathStaticHandler;
+import io.github.machineswillrise.website.routing.Dispatcher;
 
 public class Website {
 	private static final Logger LOG = Logger.getLogger(Website.class.getName());
@@ -35,12 +36,7 @@ public class Website {
 		logger.addHandler(stdoutHandler);
 	}
 
-	public static void main(String[] args) throws IOException {
-		configureLogging();
-
-		var context = new Context();
-		var dispatcher = context.dispatcher;
-
+	private static void configureRoutes(Context context, Dispatcher dispatcher) {
 		dispatcher.register("GET","/", ctx -> ctx.renderTemplate("index.ftl", new HashMap<>()));
 		dispatcher.register("GET","/health", ctx -> ctx.respond(200, "OK"));
 		dispatcher.register("POST", "/contact", ctx -> {
@@ -53,6 +49,17 @@ public class Website {
 
 			ctx.renderTemplate("success.ftl", new java.util.HashMap<>());
 		});
+		dispatcher.register("GET", "/wp-admin.php", ctx -> {
+			ctx.respond(200, "Fuck you, I hope your mother dies in her sleep");
+		});
+	}
+
+	public static void main(String[] args) throws IOException {
+		configureLogging();
+
+		var context = new Context();
+		var dispatcher = context.dispatcher;
+		configureRoutes(context,dispatcher);
 
 		var port = new InetSocketAddress(context.PORT);
 		var server = HttpServer.create(port, 0);
