@@ -1,6 +1,9 @@
 package io.github.machineswillrise.website.service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 import java.time.LocalDate;
@@ -10,7 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import java.util.logging.Logger;
+
 public class BlogService {
+	private static final Logger LOG = Logger.getLogger(BlogService.class.getName());
+
 	private static final Pattern METADATA_PATTERN = Pattern.compile("^---\\s*$");
 	private static final Pattern KEY_VALUE_PATTERN = Pattern.compile("^([a-zA-Z_]+):\\s*(.*)$");
 	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -24,37 +31,64 @@ public class BlogService {
 	}
 
 	private void loadPosts() {
-		try {
-			var blogDir = getClass().getClassLoader().getResource("blog");
-			if (blogDir == null) {
-				System.err.println("Blog directory not found in resources");
-				return;
-			}
+		List<String> postFiles = readLinesFromResource("blog/posts.txt");
+		if (postFiles == null) {
+			LOG.warning(() -> "posts.txt not found in resources/blog/");
+			return;
+		}
 
-			var blogPath = java.nio.file.Paths.get(blogDir.toURI());
-			var postFiles = java.nio.file.Files.list(blogPath)
-				.filter(path -> path.toString().endsWith(".md"))
-				.map(java.nio.file.Path::getFileName)
-				.map(java.nio.file.Path::toString)
-				.toList();
-
-			for (var postFile : postFiles) {
-				var resourcePath = "blog/" + postFile;
-				try (var is = getClass().getClassLoader().getResourceAsStream(resourcePath)) {
-					if (is != null) {
-						var content = new String(is.readAllBytes(), StandardCharsets.UTF_8);
-						var post = parseMarkdownPost(resourcePath, content);
-						if (post != null) {
-							posts.add(post);
-						}
+		for (var postFile : postFiles) {
+			if (postFile == null || postFile.isBlank()) continue;
+			var resourcePath = "blog/" + postFile.trim();
+			try (var is = getClass().getClassLoader().getResourceAsStream(resourcePath)) {
+				if (is != null) {
+					var content = readAllFromStream(is);
+					var post = parseMarkdownPost(resourcePath, content);
+					if (post != null) {
+						posts.add(post);
 					}
-				} catch (IOException e) {
-					System.err.println("Failed to load blog post: " + resourcePath);
+				} else {
+					LOG.warning(() -> "Resource not found: " + resourcePath);
 				}
+			} catch (IOException e) {
+				LOG.warning(() -> "Failed to load blog post: " + resourcePath + " - " + e.getMessage());
 			}
-	} catch (java.net.URISyntaxException | java.io.IOException e) {
-		System.err.println("Failed to load blog posts: " + e.getMessage());
+		}
 	}
+
+	private List<String> readLinesFromResource(String resourcePath) {
+		try (var is = getClass().getClassLoader().getResourceAsStream(resourcePath)) {
+			if (is == null) {
+				return null;
+			}
+			try (var reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+				var lines = new ArrayList<String>();
+				String line;
+				while ((line = reader.readLine()) != null) {
+					lines.add(line);
+				}
+				return lines;
+			}
+		} catch (IOException e) {
+			LOG.warning(() -> "Error reading resource " + resourcePath + ": " + e.getMessage());
+			return null;
+		}
+	}
+
+	private String readAllFromStream(InputStream is) throws IOException {
+		try (var reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+			var sb = new StringBuilder();
+			String line;
+			boolean first = true;
+			while ((line = reader.readLine()) != null) {
+				if (!first) {
+					sb.append("\n");
+				}
+				sb.append(line);
+				first = false;
+			}
+			return sb.toString();
+		}
 	}
 
 	private BlogPost parseMarkdownPost(String filename, String content) {

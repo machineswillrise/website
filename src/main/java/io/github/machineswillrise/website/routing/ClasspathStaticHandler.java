@@ -21,8 +21,7 @@ public class ClasspathStaticHandler {
 
 			try (exchange) {
 				try (var resourceStream = ClasspathStaticHandler.class
-					.getClassLoader()
-					.getResourceAsStream(path.substring(1))) {
+					.getClassLoader().getResourceAsStream(path.substring(1))) {
 					if (resourceStream == null) {
 						fallback.handle(exchange);
 						return;
