@@ -15,6 +15,7 @@ import com.sun.net.httpserver.HttpServer;
 
 import io.github.machineswillrise.website.routing.ClasspathStaticHandler;
 import io.github.machineswillrise.website.routing.Dispatcher;
+import io.github.machineswillrise.website.service.BlogService;
 import io.github.machineswillrise.website.service.NtfyService;
 
 public class Website {
@@ -60,13 +61,35 @@ public class Website {
 		}
 	}
 
+	private static void configureBlogRoutes(Dispatcher dispatcher, BlogService blog) {
+		dispatcher.register("GET", "/blog", ctx -> {
+			var data = new HashMap<String, Object>();
+			data.put("posts", blog.getAllPosts());
+			ctx.renderTemplate("blog.ftl", data);
+		});
+		dispatcher.register("GET", "/blog/{slug}", ctx -> {
+			var slug = ctx.getPathParam("slug");
+			var post = blog.getPostBySlug(slug);
+			if (post == null) {
+				ctx.respond(404, "Blog post not found");
+				return;
+			}
+			var data = new HashMap<String, Object>();
+			data.put("post", post);
+			ctx.renderTemplate("blog-post.ftl", data);
+		});
+	}
+
 	public static void main(String[] args) throws IOException {
 		configureLogging();
 
 		var context = new Context();
 		var dispatcher = context.dispatcher;
 		var ntfyService = context.ntfyService;
+		var blogService = new BlogService();
+
 		configureRoutes(dispatcher, ntfyService);
+		configureBlogRoutes(dispatcher, blogService);
 
 		var port = new InetSocketAddress(context.PORT);
 		var server = HttpServer.create(port, 0);

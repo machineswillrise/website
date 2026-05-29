@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -18,6 +19,9 @@ public class Dispatcher implements HttpHandler {
 	private static final Logger LOG = Logger.getLogger(Dispatcher.class.getName());
 
 	private final Map<String, Map<String, RouteAction>> routes = new HashMap<>();
+	private final Map<String, Map<String, Pattern>> routePatterns = new HashMap<>();
+	private final Map<String, Map<String, String[]>> routeParamNames = new HashMap<>();
+
 	private final Semaphore rateLimiter;
 	private final Configuration freemarkerConfig;
 	private final RequestCounter requestCounter;
@@ -30,6 +34,26 @@ public class Dispatcher implements HttpHandler {
 
 	public void register(String method, String path, RouteAction action) {
 		routes.computeIfAbsent(method, k -> new HashMap<>()).put(path, action);
+		
+		// parse path parameters and create regex pattern
+		var pattern = pathToRegex(path);
+		var paramNames = extractParamNames(path);
+		routePatterns.computeIfAbsent(method, k -> new HashMap<>()).put(path, pattern);
+		routeParamNames.computeIfAbsent(method, k -> new HashMap<>()).put(path, paramNames);
+	}
+	
+	private Pattern pathToRegex(String path) {
+		var regex = path.replaceAll("\\{([^}]+)\\}", "([^/]+)");
+		return Pattern.compile("^" + regex + "$");
+	}
+	
+	private String[] extractParamNames(String path) {
+		var matcher = Pattern.compile("\\{([^}]+)\\}").matcher(path);
+		var names = new java.util.ArrayList<String>();
+		while (matcher.find()) {
+			names.add(matcher.group(1));
+		}
+		return names.toArray(String[]::new);
 	}
 
 	public void register(String path, RouteAction action) {
@@ -87,13 +111,33 @@ public class Dispatcher implements HttpHandler {
 			}
 
 			var action = methodRoutes.get(path);
+			Map<String, String> pathParams = new HashMap<>();
+
+			if (action == null) {
+				var methodPatterns = routePatterns.get(method);
+				var methodParamNames = routeParamNames.get(method);
+				
+				if (methodPatterns != null) {
+					for (var entry : methodPatterns.entrySet()) {
+						var matcher = entry.getValue().matcher(path);
+						if (matcher.matches()) {
+							action = methodRoutes.get(entry.getKey());
+							var paramNames = methodParamNames.get(entry.getKey());
+							for (int i = 0; i < paramNames.length; i++) {
+								pathParams.put(paramNames[i], matcher.group(i + 1));
+							}
+							break;
+						}
+					}
+				}
+			}
 
 			if (action == null) {
 				renderTemplate(exchange, "404.ftl", 404);
 				return;
 			}
 
-			var context = new RequestContext(exchange, freemarkerConfig, requestCounter);
+			var context = new RequestContext(exchange, freemarkerConfig, requestCounter, pathParams);
 			action.execute(context);
 
 		} catch (Exception e) {

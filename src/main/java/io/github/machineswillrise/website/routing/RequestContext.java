@@ -26,12 +26,31 @@ public class RequestContext {
 	private Map<String, Set<String>> bodyParameters;
 	private final Configuration freemarkerConfig;
 	private final RequestCounter requestCounter;
+	private final Map<String, String> pathParams;
 
 	public RequestContext(HttpExchange exchange, Configuration freemarkerConfig, RequestCounter requestCounter) {
+		this(exchange, freemarkerConfig, requestCounter, new HashMap<>());
+	}
+
+	public RequestContext(HttpExchange exchange, Configuration freemarkerConfig, RequestCounter requestCounter, Map<String, String> pathParams) {
 		this.exchange = exchange;
 		this.parameters = parseQuery(exchange.getRequestURI().getQuery());
 		this.freemarkerConfig = freemarkerConfig;
 		this.requestCounter = requestCounter;
+		this.pathParams = pathParams;
+	}
+
+	public String getPathSegment(int index) {
+		var path = exchange.getRequestURI().getPath();
+		var segments = path.split("/");
+		if (index >= 0 && index < segments.length) {
+			return segments[index];
+		}
+		return null;
+	}
+
+	public String getPathParam(String name) {
+		return pathParams.get(name);
 	}
 
 	private Map<String, Set<String>> parseQuery(String query) {
