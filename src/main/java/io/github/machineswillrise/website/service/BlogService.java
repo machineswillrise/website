@@ -124,7 +124,7 @@ public class BlogService {
 			return null;
 		}
 
-		var slug = filename.substring(filename.lastIndexOf('/') + 1).replace(".md", "");
+		var slug = filename.substring(filename.lastIndexOf('/') + 1).replace(".txt", "");
 		var date = LocalDate.parse(dateStr, DATE_FORMATTER);
 		var body = String.join("\n", bodyLines);
 		var excerpt = body.length() > 200 ? body.substring(0, 200) + "..." : body;
