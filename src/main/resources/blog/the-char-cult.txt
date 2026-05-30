@@ -1,0 +1,22 @@
+---
+title: The char[] Cult
+date: 2026-05-29
+---
+
+I'm sure you've heard it before. "Never store sensitive information in a String because it can be stored on the heap indefinitely in the JVM's String pool and zeroing it out might not erase it."
+
+If someone is dumping the heap of a JVM, they're executing code locally on your machine. Whether they got access to JMX ports or added a Java instrumentation agent or LD_PRELOADed something in or have root on the machine doesn't matter. They compromised your machine, and you can only cover your ass at this point.
+
+Next, if your program is dealing with ANY requests from the Internet, congratulations, that potentially sensitive data is getting stored as, you guessed it, a String.
+
+Next, go open your computer settings and check how much of the memory is being swapped to the disk. It's likely more than you think, especially if you're using a laptop.
+
+Next, the garbage collector runs when there are no longer any references to an object, when the heap is almost full, or when System.gc() is called. The garbage collector (unfortunately) runs finalize() and frees up the memory used by the object.
+
+If your objects are very short lived, they will indeed be picked up by the garbage collector very quickly. Especially if you're creating a lot of them, as with Strings.
+
+Also, let's use an encryption program as an example. When the user types the plaintext, that's a String. Using char[] for the key won't save you from shit when the plaintext is right there.
+
+If your program only works in the command line or you're dealing with JPasswordFields, fine, use char[]. Zero it out afterwards with Arrays.fill and pat yourself on the back for obeying 'best practices'.  It won't hurt anything, but it also won't protect you from a real-world attacker.
+
+It's like the people that put a sticker over their camera when the real threat is the microphone. Or the people that install an antivirus and pop-up blocker and then go ahead and click everything anyway. They're missing the forest for the trees.
