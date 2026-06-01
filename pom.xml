@@ -5,7 +5,7 @@
 
 	<groupId>io.github.machineswillrise</groupId>
 	<artifactId>website</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 
 	<name>website</name>
 	<description>My personal portfolio website.</description>

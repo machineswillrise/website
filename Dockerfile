@@ -15,4 +15,4 @@ RUN mvn clean package
 EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "/app/target/website-1.0-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/app/target/website-1.0.jar"]
