@@ -1,0 +1,10 @@
+---
+title: The @Contended Annotation in Java
+date: 2026-06-01
+---
+
+The @Contended annotation is an interesting feature in Java that you may not know about. It's a relatively new feature that was added in Java 8, and it's used to prevent false sharing in multi-threaded applications. It's only available for use inside the JDK unless you run the JVM with the `-XX:+EnableContended` flag.
+
+It's used for padding fields in classes to prevent false sharing, which is a performance issue that occurs when multiple threads access different fields that happen to be on the same cache line. It pads each field with 128 bytes of padding to ensure that each field is on its own cache line.
+
+It's used in the implementation for classes such as LongAdder that are designed to be used in multi-threaded environments.
