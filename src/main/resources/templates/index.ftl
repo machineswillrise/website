@@ -15,6 +15,7 @@
 	<h2>Projects</h2>
 	<div class="projects">
 		<a href="https://github.com/machineswillrise/java-encrypter">Java Encrypter</a>
+		<a href="https://github.com/machineswillrise/java-restaurant">Java Restaurant</a>
 		<a href="https://github.com/machineswillrise/jagent">JAgent</a>
 		<a href="https://github.com/machineswillrise/javawm">JavaWM (Incomplete right now)</a>
 		<a href="https://github.com/machineswillrise/rna-analyzer">RNA Analyzer</a>
