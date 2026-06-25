@@ -17,8 +17,7 @@
 		<a href="https://github.com/machineswillrise/java-restaurant">Java Restaurant</a>
 		<a href="https://github.com/machineswillrise/jagent">JAgent</a>
 		<a href="https://github.com/machineswillrise/javawm">JavaWM (Incomplete right now)</a>
-		<a href="https://github.com/machineswillrise/rna-analyzer">RNA Analyzer</a>
-		<a href="https://github.com/machineswillrise/java-tictactoe">Java Tic-Tac-Toe</a>
+		<a href="https://github.com/machineswillrise/misc-school-stuff">Misc School Stuff</a>
 		<a href="https://github.com/machineswillrise/dotfiles">Dotfiles</a>
 	</div>
 
