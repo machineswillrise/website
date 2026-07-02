@@ -11,7 +11,9 @@ The specification for it has been mostly open from the start, but the official i
 
 My first impression after downloading it was that the VM is a lot smaller than Java's -- only around 160 MB instead of 350. Everyone will tell you that you need Visual Studio to work on C#, but the command line tools are pretty good and C# LSP is actually better than Java. However, the C# command-line have telemetry that reports back to the mothership, which I had to disable in my shell configuration. Also, reading some C# projects, I hate the way SLN files look. Luckily, you only need them if you're working on the project in Visual Studio.
 
-C# has a standard build system, so you don't have multiple build systems like Maven, Gradle, or Ant, and it doesn't need shell scripts in the root of the project to bootstrap the build system or plugins that need to be updated.
+The documentation for C# is less scattered than Java's, but it's also not as detailed. The official documentation still has more examples than Javadocs, and it has an AI chatbot that you can talk to.
+
+C# has a standard build system, so you don't have multiple build systems like Maven, Gradle, or Ant, and it doesn't need shell scripts in the root of the project to bootstrap the build system or plugins that need to be updated. C# also has a way you can run a script with dependencies specified at the top like jBang.
 
 My favorite feature is definitely the modules, since I mostly write Java in VS Code or Emacs, which don't have auto-importing like Eclipse or Visual Studio. Modern Java actually has modules, but I keep most of my projects at 21 instead of 25 because it's not as bleeding-edge and more tested. Also, not many projects are using modules. All of the JDK has been migrated to use modules, but the only modular project I could find was JLine.
 
@@ -28,6 +30,8 @@ C# has getters and setters as part of the language. I'm more conservative with t
 C# actually invented async/await, it even had it before Python did. Java uses futures like C++, which chain together asynchronous computations with methods like thenApply and thenCompose. 
 
 Like C, C# has conditional compilation. It doesn't use #ifdef like C, but it does have #if. You can use it to build different versions of your codebase for different platforms, but you should probably try to use it as little as possible.
+
+Native access and unsafe code are both easier in C# than in Java. You can use P/Invoke to call native functions, and you can use unsafe code to use pointers and memory directly. It uses [LibraryImport] properties which looks closer to JNA than Panama.
 
 The biggest problem with C# is the GUI situation. C# has WinForms and Maui, but they're all tied to Windows (or Windows/Android, in the case of Maui.) Avalonia is decent and cross-platform, but it has a lot of boilerplate and you need XML to define your UI. I much prefer a simple imperative model like Swing.
 
