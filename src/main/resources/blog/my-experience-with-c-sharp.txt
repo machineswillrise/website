@@ -1,0 +1,34 @@
+---
+title: My Experience With C#
+date: 2026-07-02
+---
+
+My main language for the past year has been Java because it has nice-looking C-like syntax, cross-platform compatibility, and garbage collection with a lot of built-in data structures that make it more convenient to write than C (and I don't have to deal with null-terminated strings, header files, pointer arithmetic, or CMake!)
+
+As someone who doesn't run Windows on my computers, C# seems like an odd language because it used to be proprietary and locked to Microsoft's ecosystem but I had to use it recently since I'm taking a class about game development. (Unfortunately, I have to use Unity, which is proprietary.) C# runs on a virtual machine called the Common Language Infrastructure -- a pompous name considering that it only runs Microsoft languages 😄.
+
+The specification for it has been mostly open from the start, but the official implementation of the virtual machine (.NET Framework) has been proprietary and specific to Windows. Luckily, Mono was created so it could be run on GNU/Linux -- even before the VM -- which got renamed to .NET Core became open-source. Still, I found it confusing that the C# compiler outputs EXEs instead of CARs or something. Interestingly, the development process for the VM is a bit more democratic. To contribute to OpenJDK, you have to sign an OCA (Oracle Contributor Agreement) and wait a long time for it to be approved. Comparatively, in C#, I can just file a bug report on GitHub.
+
+My first impression after downloading it was that the VM is a lot smaller than Java's -- only around 160 MB instead of 350. Everyone will tell you that you need Visual Studio to work on C#, but the command line tools are pretty good and C# LSP is actually better than Java. However, the C# command-line have telemetry that reports back to the mothership, which I had to disable in my shell configuration. Also, reading some C# projects, I hate the way SLN files look. Luckily, you only need them if you're working on the project in Visual Studio.
+
+C# has a standard build system, so you don't have multiple build systems like Maven, Gradle, or Ant, and it doesn't need shell scripts in the root of the project to bootstrap the build system or plugins that need to be updated.
+
+My favorite feature is definitely the modules, since I mostly write Java in VS Code or Emacs, which don't have auto-importing like Eclipse or Visual Studio. Modern Java actually has modules, but I keep most of my projects at 21 instead of 25 because it's not as bleeding-edge and more tested. Also, not many projects are using modules. All of the JDK has been migrated to use modules, but the only modular project I could find was JLine.
+
+C# has no checked exceptions. If you've ever tried to do encryption in Java, you've seen how many different checked exceptions the AES APIs throw and probably just wrote throws Exception and were done with it. I find it a double edged sword, because it's easier to forget to handle an exception in C#, because documentation doesn't enforce a compiler mechanism like in Java. But there's also less boilerplate. For example, the URL decoding API used to take strings like "UTF-8" instead of a StandardCharsets constant. (In modern Java, it's overloaded.) But that means that you would have to check for an unsupported character set every time, even if you were sure that it existed.
+
+The compiler also enforces null safety. Variables ending with a question mark will be nullable, and ones that don't end with a question mark will not be nullable. This prevents null pointer exceptions at compile time.
+
+Also, C# supports unsigned math. In Java, every type is signed -- even bytes. Bytes in Java begin have a minimum value of -128 and a maximum value of 127. That means that if you cast 0xFF (255) into a byte and then print out it's value, you'll get -1. You have to do a bitwise AND with 0xFF to get it's real value: 255.
+
+C# can also check for integer overflows. Integer overflows in Java are silent. They don't throw any exceptions, they just surprise you at the worst possible time. In a checked C# block, an exception gets thrown on an integer overflow.
+
+C# has getters and setters as part of the language. I'm more conservative with them, since I try to avoid the anemic domain model, but I use them sometimes. Speaking of which, Java records are immutable, meaning that you can't modify them after instantiation. Some people use the "wither pattern" that creates a new object, but C# records can have setters.
+
+C# actually invented async/await, it even had it before Python did. Java uses futures like C++, which chain together asynchronous computations with methods like thenApply and thenCompose. 
+
+Like C, C# has conditional compilation. It doesn't use #ifdef like C, but it does have #if. You can use it to build different versions of your codebase for different platforms, but you should probably try to use it as little as possible.
+
+The biggest problem with C# is the GUI situation. C# has WinForms and Maui, but they're all tied to Windows (or Windows/Android, in the case of Maui.) Avalonia is decent and cross-platform, but it has a lot of boilerplate and you need XML to define your UI. I much prefer a simple imperative model like Swing.
+
+Overall, C# is a decent language. I wouldn't use it if you already know Java.
