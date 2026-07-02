@@ -13,10 +13,9 @@
 
 	<h2>Projects</h2>
 	<div class="projects">
-		<a href="https://github.com/machineswillrise/java-encrypter">Java Encrypter</a>
-		<a href="https://github.com/machineswillrise/java-restaurant">Java Restaurant</a>
 		<a href="https://github.com/machineswillrise/jagent">JAgent</a>
 		<a href="https://github.com/machineswillrise/javawm">JavaWM (Incomplete right now)</a>
+		<a href="https://github.com/machineswillrise/website">Website>/a>
 		<a href="https://github.com/machineswillrise/misc-school-stuff">Misc School Stuff</a>
 		<a href="https://github.com/machineswillrise/dotfiles">Dotfiles</a>
 	</div>
