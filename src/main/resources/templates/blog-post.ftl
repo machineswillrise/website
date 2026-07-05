@@ -1,6 +1,7 @@
 <#include "base.ftl">
 
 <@base requestCount=requestCount>
+	<link rel="stylesheet" href="/blog.css">
 	<h1>${post.title()}</h1>
 	<p class="blog-date">${post.date()}</p>
 	
