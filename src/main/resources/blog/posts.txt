@@ -1,6 +1,4 @@
 welcome-to-my-blog.txt
-youre-underutilizing-javas-standard-library.txt
 the-char-cult.txt
 stop-using-flatlaf.txt
-the-contended-annotation-in-java.txt
 my-experience-with-c-sharp.txt

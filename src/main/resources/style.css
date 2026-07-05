@@ -20,7 +20,7 @@ body {
 
 h1 {
 	font-size: 2.5rem;
-	margin-bottom: 0.5rem;
+	margin-bottom: 0.25rem;
 	background: linear-gradient(90deg, #ff6b6b, #feca57);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -29,7 +29,6 @@ h1 {
 
 .subtitle {
 	color: #888;
-	margin-bottom: 2rem;
 }
 
 h2 {
@@ -37,14 +36,14 @@ h2 {
 	font-size: 1.5rem;
 }
 
-.links, .projects {
+.links, .projects, .favorites {
 	display: flex;
 	gap: 1rem;
 	flex-wrap: wrap;
 	margin: 1.5rem 0;
 }
 
-.links a, .projects a {
+.links a, .projects a, .favorites a {
 	color: #4ecdc4;
 	text-decoration: none;
 	padding: 0.5rem 1rem;
@@ -53,7 +52,7 @@ h2 {
 	transition: all 0.2s;
 }
 
-.links a:hover, .projects a:hover {
+.links a:hover, .projects a:hover, .favorites a:hover {
 	background: rgba(78, 205, 196, 0.2);
 	transform: translateY(-2px);
 }
@@ -105,7 +104,10 @@ h2 {
 	font-weight: bold;
 }
 
-/* Blog styles */
+
+
+
+/* -------- BLOG -------- */
 .blog-posts {
 	display: flex;
 	flex-direction: column;
@@ -175,3 +177,4 @@ h2 {
 .back-link:hover {
 	text-decoration: underline;
 }
+/* -------------------- */
