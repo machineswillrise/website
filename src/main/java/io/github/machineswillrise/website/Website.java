@@ -51,7 +51,7 @@ public class Website {
 			var slug = ctx.getPathParam("slug");
 			var post = blog.getPostBySlug(slug);
 			if (post == null) {
-				ctx.renderTemplate("404.ftl", new HashMap<>());
+				ctx.respond(404, "Blog post not found");
 				return;
 			}
 
@@ -74,12 +74,10 @@ public class Website {
 		var server = HttpServer.create(port, 0);
 		server.setExecutor(Executors.newCachedThreadPool());
 
+		var staticHandler = new ClasspathStaticHandler("static/");
 		server.createContext("/", dispatcher);
+		server.createContext("/static", staticHandler.create(dispatcher));
 
-		var cssRoutes = List.of("/style.css", "/blog.css");
-		for (var route : cssRoutes) {
-			server.createContext(route, new ClasspathStaticHandler(route).create(dispatcher));
-		}
 		server.start();
 
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {

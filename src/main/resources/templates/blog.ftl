@@ -1,7 +1,7 @@
 <#include "base.ftl">
 
 <@base requestCount=requestCount>
-	<link rel="stylesheet" href="/blog.css">
+	<link rel="stylesheet" href="/static/blog.css">
 	<h1>Blog</h1>
 	<p class="subtitle">Thoughts, ideas, and ramblings</p>
 	
