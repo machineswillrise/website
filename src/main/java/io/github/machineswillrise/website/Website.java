@@ -51,7 +51,7 @@ public class Website {
 			var slug = ctx.getPathParam("slug");
 			var post = blog.getPostBySlug(slug);
 			if (post == null) {
-				ctx.respond(404, "Blog post not found");
+				ctx.renderTemplate("404.ftl", new HashMap<>());
 				return;
 			}
 
