@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
@@ -22,12 +22,13 @@ public class Dispatcher implements HttpHandler {
 	private final Map<String, Map<String, Pattern>> routePatterns = new HashMap<>();
 	private final Map<String, Map<String, String[]>> routeParamNames = new HashMap<>();
 
-	private final Semaphore rateLimiter;
+	private final int rateLimit;
 	private final Configuration freemarkerConfig;
 	private final RequestCounter requestCounter;
+	private final Map<String, IPRateLimit> ipRateLimits = new ConcurrentHashMap<>();
 
 	public Dispatcher(int rateLimit, Configuration freemarkerConfig, RequestCounter requestCounter) {
-		this.rateLimiter = new Semaphore(rateLimit);
+		this.rateLimit = rateLimit;
 		this.freemarkerConfig = freemarkerConfig;
 		this.requestCounter = requestCounter;
 	}
@@ -94,7 +95,8 @@ public class Dispatcher implements HttpHandler {
 		requestCounter.recordRequest();
 		String ip = exchange.getRemoteAddress().getAddress().getHostAddress();
 
-		if (!rateLimiter.tryAcquire()) {
+		var ipLimit = ipRateLimits.computeIfAbsent(ip, k -> new IPRateLimit());
+		if (!ipLimit.tryIncrement(rateLimit)) {
 			LOG.warning(() -> "Rate limit exceeded for " + ip);
 			sendErrorResponse(exchange, 429, ip, "429 Too Many Requests");
 			return;
@@ -142,8 +144,6 @@ public class Dispatcher implements HttpHandler {
 
 		} catch (Exception e) {
 			sendErrorResponse(exchange, 500, ip, "500 Internal Server Error");
-		} finally {
-			rateLimiter.release();
 		}
 
 		LOG.info(() -> "Request handled for " + ip);
