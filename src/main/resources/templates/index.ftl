@@ -1,6 +1,9 @@
 <#include "base.ftl">
 
 <@base requestCount=requestCount>
+	<!-- Android Banner -->
+	<script src="https://keepandroidopen.org/banner.js?size=mini&animation=off" integrity="sha256-/lB05PMa6MIAwXual6j7x5PdHoUUdEmv+nwThTIGUv0=" crossorigin="anonymous"></script>
+
 	<h1>Machines Will Rise</h1>
 	<p class="subtitle">Hi! I'm a 16 year old high school student that loves GNU/Linux and Emacs.</p>
 
