@@ -18,7 +18,7 @@ public class Website {
 	private static final Logger LOG = Logger.getLogger(Website.class.getName());
 
 	private static void configureRoutes(Dispatcher dispatcher, NtfyService ntfy) {
-		dispatcher.register("GET","/", ctx -> ctx.renderTemplate("index.ftl", new HashMap<>()));
+		dispatcher.register("GET","/", ctx -> ctx.renderTemplate("index.ftl"));
 		dispatcher.register("GET","/health", ctx -> ctx.respond(200, "OK"));
 		dispatcher.register("POST", "/contact", ctx -> {
 			var name = ctx.getBodyParam("name", "");
@@ -28,7 +28,7 @@ public class Website {
 			var ntfyMessage = String.format("Contact form submission from %s (%s): %s", name, email, message);
 			ntfy.sendNotification(ntfyMessage);
 
-			ctx.renderTemplate("success.ftl", new HashMap<>());
+			ctx.renderTemplate("success.ftl");
 		});
 
 		// the attackers will enjoy this
@@ -42,22 +42,22 @@ public class Website {
 
 	private static void configureBlogRoutes(Dispatcher dispatcher, BlogService blog) {
 		dispatcher.register("GET", "/blog", ctx -> {
-			var data = new HashMap<String, Object>();
-			data.put("posts", blog.getAllPosts());
-			ctx.renderTemplate("blog.ftl", data);
+			var articles = new HashMap<String, Object>();
+			articles.put("posts", blog.getAllPosts());
+			ctx.renderTemplate("blog.ftl", articles);
 		});
 
 		dispatcher.register("GET", "/blog/{slug}", ctx -> {
 			var slug = ctx.getPathParam("slug");
 			var post = blog.getPostBySlug(slug);
 			if (post == null) {
-				ctx.respond(404, "Blog post not found");
+				ctx.renderTemplate("404.ftl");
 				return;
 			}
 
-			var data = new HashMap<String, Object>();
-			data.put("post", post);
-			ctx.renderTemplate("blog-post.ftl", data);
+			var postMap = new HashMap<String, Object>();
+			postMap.put("post", post);
+			ctx.renderTemplate("blog-post.ftl", postMap);
 		});
 	}
 

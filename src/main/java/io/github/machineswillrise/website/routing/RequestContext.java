@@ -115,12 +115,22 @@ public class RequestContext {
 		return defaultValue;
 	}
 
+	private Map<String, Object> addRequestCountToData(Map<String, Object> data) {
+		data.put("requestCount", requestCounter.getRequestCount());
+		return data;
+	}
+	
 	public void renderTemplate(String templateName, Map<String, Object> data) throws IOException, TemplateException {
-		Template template = freemarkerConfig.getTemplate(templateName);
+		addRequestCountToData(data);
 		Writer out = new StringWriter();
-		var model = new HashMap<String, Object>(data);
-		model.put("requestCount", requestCounter.getRequestCount());
-		template.process(model, out);
+		Template template = freemarkerConfig.getTemplate(templateName);
+
+		template.process(data, out);
 		respond(200, out.toString());
+	}
+
+	// for templates that don't need any additional data besides the request count
+	public void renderTemplate(String templateName) throws IOException, TemplateException {
+		renderTemplate(templateName, addRequestCountToData(new HashMap<>()));
 	}
 }
