@@ -19,7 +19,9 @@ public class Website {
 
 	private static void configureRoutes(Dispatcher dispatcher, NtfyService ntfy) {
 		dispatcher.register("GET","/", ctx -> ctx.renderTemplate("index.ftl"));
+		dispatcher.register("GET","/donate", ctx -> ctx.renderTemplate("donate.ftl"));
 		dispatcher.register("GET","/health", ctx -> ctx.respond(200, "OK"));
+
 		dispatcher.register("POST", "/contact", ctx -> {
 			var name = ctx.getBodyParam("name", "");
 			var email = ctx.getBodyParam("email", "");

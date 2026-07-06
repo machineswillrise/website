@@ -57,4 +57,10 @@
 		<input type="text" name="message" placeholder="Message" required>
 		<button type="submit">Send</button>
 	</form>
+
+	<!-- Web 2.0 Badges -->
+	<img src="/static/images/no_spam.gif" alt="No Spam" class="badge">
+	<a href="/donate">
+		<img src="/static/images/donate.png" alt="Donate" class="badge">
+	</a>
 </@base>

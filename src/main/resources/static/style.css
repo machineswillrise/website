@@ -103,3 +103,8 @@ h2 {
 	color: #feca57;
 	font-weight: bold;
 }
+
+.badge {
+	width: 35%;
+	height: 35%;
+}
