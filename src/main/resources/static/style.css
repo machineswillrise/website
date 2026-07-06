@@ -36,14 +36,14 @@ h2 {
 	font-size: 1.5rem;
 }
 
-.links, .projects, .favorites {
+.card {
 	display: flex;
 	gap: 1rem;
 	flex-wrap: wrap;
 	margin: 1.5rem 0;
 }
 
-.links a, .projects a, .favorites a {
+.card a {
 	color: #4ecdc4;
 	text-decoration: none;
 	padding: 0.5rem 1rem;
@@ -52,7 +52,7 @@ h2 {
 	transition: all 0.2s;
 }
 
-.links a:hover, .projects a:hover, .favorites a:hover {
+.card a:hover {
 	background: rgba(78, 205, 196, 0.2);
 	transform: translateY(-2px);
 }
