@@ -69,4 +69,10 @@
 	<a href="/donate">
 		<img src="/static/images/donate.png" alt="Donate" class="badge">
 	</a>
+
+	<!--For Marginalia and Wiby -->
+	<p class="invisible-tags">
+		Buzzwords to fulfill "Web 2.0" criteria: Less is more! Ruby on rails rocks! This is a public beta and start-up start up! Dave Legg is cool. AJAX is cool! http://isometric.sixsided.org/ http://www.slashdot.org/ Web 2.0 Web 2.0 Blogline blogroll foo mesh-up http://web2.0validator.com/ FireFox rocks! http://roker.dingens.web2.0php?foo=bar Nitro The Long Tail k2 share alike What is podcast podcasting Semantic Web blog foo.rdf
+		Enlighten the FBI, CIA, Mossad et al: Bombe bomb George W. Bush G8 Heiligendamm Demonstration Attentat auf Schäuble Sprengstoff Dschihad jihad islam terror Allah Osama bin Laden Usama ibn Ladin Afghani Afghan Irak Iraq Krieg war anal sex KIPo teenager little girl vagina no its child by penis drogen drugs Stoff LSD THC mfg nuclear dirty bomb uran plutonium sarin U-Bahn Feuerlöscher Nägel Überwachung Vermummung Kaputze Schläger Klappmesser butterfly knife niger KKK Juden Nazi Hitler vergasen Auschwitz KZ Rauhkopierer Verbrecher illegal hacken cracken knacken sub zero day exploit xpl0itz Microsoft Windows Vista CSS decss DVD porn pr0n warez mp3z AllOfMP3.com TOR crypto break chipper AES DES RSA DNS LART BOFH w00t L.M.A.A. Fnord and line noise
+	</p>
 </@base>
