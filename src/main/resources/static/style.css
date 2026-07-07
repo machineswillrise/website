@@ -104,6 +104,13 @@ h2 {
 	font-weight: bold;
 }
 
+.cat {
+	max-width: auto;
+	height: 300px;
+	display: block;
+	margin: 1rem auto;
+}
+
 .badge {
 	width: 35%;
 	height: 35%;

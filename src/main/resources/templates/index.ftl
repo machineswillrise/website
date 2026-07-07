@@ -42,6 +42,12 @@
 		</ul>
 	</div>
 
+	<center>
+		<p>Here is a picture of my beautiful cat:</p>
+		<img src="/static/images/cat.jpg" alt="My Cat" class="cat">
+		<p style="margin-bottom: 2rem;">yes... i own a blahaj</p>
+	</center>
+
 	<h2>Interesting Websites</h2>
 	<div class="card">
 		<p>These are some interesting and obscure websites I found.</p>
