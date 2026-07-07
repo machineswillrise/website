@@ -69,6 +69,7 @@
 	<a href="/donate">
 		<img src="/static/images/donate.png" alt="Donate" class="badge">
 	</a>
+	<img src="/static/images/get_firefox.gif" alt="Get Firefox" class="badge">
 
 	<!--For Marginalia and Wiby Search Engines -->
 	<p class="invisible-text">
