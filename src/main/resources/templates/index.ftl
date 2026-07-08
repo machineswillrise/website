@@ -27,8 +27,8 @@
 	<div class="card">
 		<ul>
 			<li>I have 7 laptops, all running Linux. I currently use a Dell laptop running Debian with XFCE and XLibre. I like Arch too but I prefer not to daily drive it.</li>
-			<li>I use FOSS software for nearly everything. I hate face recognition and mass surveillance.</li>
-			<li>I like Raspberry Pi and ESP32 development and experimenting with interesting hardware.
+			<li>I use FOSS software for nearly everything.</li>
+			<li>I like Raspberry Pi and ESP32 development and experimenting with interesting hardware.</li>
 		</ul>
 	</div>
 
