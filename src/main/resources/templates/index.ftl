@@ -71,4 +71,6 @@
 	</a>
 	<img src="/static/images/get_firefox.gif" alt="Get Firefox" class="badge">
 	<img src="/static/images/pride.gif" alt="Pride" class="badge">
+	<img src="/static/images/no_discord.gif" alt="No Discord" class="badge">
+	<img src="/static/images/cookie_free.gif" alt="Cookie Free" class="badge">
 </@base>
