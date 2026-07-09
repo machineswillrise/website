@@ -56,12 +56,13 @@
 		<a href="https://web.archive.org/web/20260311143609/http://www.tastyfish.cz/lrs/main.html">Drummyfish Wiki</a>
 	</div>
 
-	<p>You can contact me here or email me directly using the email on my GitHub page. Please only send me emails if something is important.</p>
+	<h2>Contact</h2>
 	<form action="/contact" method="post" class="contact-form">
 		<input type="text" name="name" placeholder="Name" required>
 		<input type="email" name="email" placeholder="Email" required>
 		<input type="text" name="message" placeholder="Message" required>
 		<button type="submit">Send</button>
+		<a href="/contact-misc">Other contact methods</a>
 	</form>
 
 	<!-- Web 2.0 Badges -->

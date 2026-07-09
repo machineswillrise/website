@@ -18,9 +18,10 @@ public class Website {
 	private static final Logger LOG = Logger.getLogger(Website.class.getName());
 
 	private static void configureRoutes(Dispatcher dispatcher, NtfyService ntfy) {
-		dispatcher.register("GET","/", ctx -> ctx.renderTemplate("index.ftl"));
-		dispatcher.register("GET","/donate", ctx -> ctx.renderTemplate("donate.ftl"));
-		dispatcher.register("GET","/health", ctx -> ctx.respond(200, "OK"));
+		dispatcher.register("GET", "/",             ctx -> ctx.renderTemplate("index.ftl"));
+		dispatcher.register("GET", "/donate",       ctx -> ctx.renderTemplate("donate.ftl"));
+		dispatcher.register("GET", "/contact-misc", ctx -> ctx.renderTemplate("contact-misc.ftl"));
+		dispatcher.register("GET", "/health",       ctx -> ctx.respond(200, "OK"));
 
 		dispatcher.register("POST", "/contact", ctx -> {
 			var name = ctx.getBodyParam("name", "");
@@ -36,7 +37,7 @@ public class Website {
 		// the attackers will enjoy this
 		var wordpressUrls = List.of("/wp-admin", "/wp-login.php", "/wp-signup.php", "/wp-register.php");
 		for (var url : wordpressUrls) {
-			dispatcher.register("GET",url, ctx -> {
+			dispatcher.register("GET", url, ctx -> {
 				ctx.respond(200, "Fuck you, I hope your mother dies in her sleep");
 			});
 		}
