@@ -10,5 +10,6 @@
 			<li>Telegram: snekboop1</li>
 		</ul>
 		<p>Please only email me if something is important.</p>
+		<p>Also, I don't check Telegram that much. I mostly use it to troll scammers.</p>
 	</div>
 </@base>
