@@ -1,7 +1,7 @@
 <#include "base.ftl">
 
 <@base requestCount=requestCount>
-	<div class="card">
+	<div class="card" style="width: 600px;">
 		<h1>Other Contact Methods</h1>
 		<ul>
 			<li>Email: check my GitHub page.</li>
