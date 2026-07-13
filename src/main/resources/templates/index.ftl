@@ -38,6 +38,9 @@
 			<li>Song: Icon of Coil - Shelter</li>
 			<li>Animal: Cat</li>
 			<li>Language: Java</li>
+			<li>OS: Debian</li>
+			<li>Browser: LibreWolf</li>
+			<li>Search Engine: Mojeek</li>
 			<li>Indentation: Tabs :)</li>
 		</ul>
 	</div>
