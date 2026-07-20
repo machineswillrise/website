@@ -48,25 +48,27 @@
 	<center>
 		<p>Here is a picture of my beautiful cat:</p>
 		<img src="/static/images/cat.jpg" alt="My Cat" class="cat">
-		<p style="margin-bottom: 2rem;">yes... i own a blahaj</p>
+		<p style="margin-bottom: 2rem">yes... i own a blahaj</p>
 	</center>
 
 	<h2>Interesting Websites</h2>
 	<div class="card">
 		<p>These are some interesting and obscure websites I found.</p>
-		<a href="https://eldritchdata.neocities.org">Eldritch Data</a>
-		<a href="https://digdeeper.neocities.org">Dig Deeper</a>
-		<a href="https://web.archive.org/web/20260311143609/http://www.tastyfish.cz/lrs/main.html">Drummyfish Wiki</a>
-		<a href="http://warp.povusers.org/grrr/index.html">Warp</a>
-	</div>
+		<div>
+			<p style="margin-bottom: 1rem">Clearnet Sites:</p>
+			<a href="https://eldritchdata.neocities.org">Eldritch Data</a>
+			<a href="https://digdeeper.neocities.org">Dig Deeper</a>
+			<a href="https://web.archive.org/web/20260311143609/http://www.tastyfish.cz/lrs/main.html">Drummyfish Wiki</a>
+			<a href="http://warp.povusers.org/grrr/index.html">Warp</a>
+		</div>
 
-	<h2>Interesting Onion Sites</h2>
-	<div class="card">
-		<a href="http://worldboxd6boiz3565vylaucsc7qqrbd6yflwhnlrwmbk5sydsfx4wyd.onion">World Box</a>
-		<a href="http://nanochanrayhy7nuuhldw2n4sq7tmv7xzdwaxtbptetss5eaznwfknyd.onion">Nano Chan</a>
-		<a href="http://wormgptkf23rl2jz53krs765bziz6any5waparuuc6rdz5az2yp7p7ad.onion">Worm GPT</a>
-		<a href="http://cccpastefzuz6unowzgjtdwmxwjfgf5za7owwci3b2zys4jmc3xjszad.onion">Soviet Pastebin</a>
-		<a href="http://nembhuk7l5nzvgtsiwck3h4pyrvr7n67dx4rpdmo3wwbo3qtwyjgpgyd.onion">Bioweapons</a>
+		<div>
+			<p style="margin-bottom: 1rem">Onion Sites:</p>
+			<a href="http://worldboxd6boiz3565vylaucsc7qqrbd6yflwhnlrwmbk5sydsfx4wyd.onion">World Box</a>
+			<a href="http://nanochanrayhy7nuuhldw2n4sq7tmv7xzdwaxtbptetss5eaznwfknyd.onion">Nano Chan</a>
+			<a href="http://wormgptkf23rl2jz53krs765bziz6any5waparuuc6rdz5az2yp7p7ad.onion">Worm GPT</a>
+			<a href="http://cccpastefzuz6unowzgjtdwmxwjfgf5za7owwci3b2zys4jmc3xjszad.onion">Soviet Pastebin</a>
+		</div>
 	</div>
 
 	<h2>Contact</h2>
