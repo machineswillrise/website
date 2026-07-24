@@ -119,3 +119,8 @@ h2 {
 .invisible-text {
 	display: none;
 }
+
+.justify-list ul {
+	column-count: 3;
+	column-gap: 30px;
+}

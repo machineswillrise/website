@@ -45,6 +45,34 @@
 		</ul>
 	</div>
 
+	<h2>Dislikes</h2>
+	<div class="card justify-list">
+		<ul>
+			<li>Age Verification</li>
+			<li>Anti-Cheat Software</li>
+			<li>Cities</li>
+			<li>Clippy Profile Pictures</li>
+			<li>Discord</li>
+			<li>Dogs</li>
+			<li>DuckDuckGo</li>
+			<li>Face Recognition</li>
+			<li>Flock Cameras</li>
+			<li>Gun Control</li>
+			<li>Hot Weather</li>
+			<li>Kubernetes</li>
+			<li>Linux Mint</li>
+			<li>Mechanical Keyboards</li>
+			<li>PayPal</li>
+			<li>Radio Music</li>
+			<li>Samsung Phones</li>
+			<li>Solarized Theme</li>
+			<li>Steam</li>
+			<li>TVs</li>
+			<li>Visual Studio</li>
+			<li>Wayland</li>
+		</ul>
+	</div>
+
 	<center>
 		<p>Here is a picture of my beautiful cat:</p>
 		<img src="/static/images/cat.jpg" alt="My Cat" class="cat">
