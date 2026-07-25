@@ -12,7 +12,7 @@
 		<div class="container">
 			<#nested>
 			<p class="footer">Total requests served today: ${requestCount}</p>
-			<p class="footer">This website is powered by <span class="orange-text">Java!</span></p>
+			<p class="footer">This website is powered by <span class="orange-text">Java</span> and Apache Freemarker!</p>
 		</div>
 
 		<!--For Marginalia and Wiby Search Engines -->
