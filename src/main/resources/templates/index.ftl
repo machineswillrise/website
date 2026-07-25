@@ -62,9 +62,9 @@
 			<li>Hot Weather</li>
 			<li>Kubernetes</li>
 			<li>Linux Mint</li>
+			<li>Mainstream Music</li>
 			<li>Mechanical Keyboards</li>
 			<li>PayPal</li>
-			<li>Radio Music</li>
 			<li>Samsung Phones</li>
 			<li>Solarized Theme</li>
 			<li>Steam</li>
