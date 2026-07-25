@@ -59,7 +59,6 @@
 			<li>Face Recognition</li>
 			<li>Flock Cameras</li>
 			<li>Gun Control</li>
-			<li>Hot Weather</li>
 			<li>Kubernetes</li>
 			<li>Linux Mint</li>
 			<li>Mainstream Music</li>
@@ -68,6 +67,7 @@
 			<li>Samsung Phones</li>
 			<li>Solarized Theme</li>
 			<li>Steam</li>
+			<li>Summer</li>
 			<li>TVs</li>
 			<li>Visual Studio</li>
 			<li>Wayland</li>
