@@ -46,6 +46,23 @@
 		</ul>
 	</div>
 
+	<h2>Likes</h2>
+	<div class="card justify-list">
+		<ul>
+			<li>C</li>
+			<li>C++ (but no obscure features)</li>
+			<li>Raku</li>
+			<li>Biking</li>
+			<li>LineageOS</li>
+			<li>Tor</li>
+			<li>I2P</li>
+			<li>Monero</li>
+			<li>Piracy</li>
+			<li>Soulseek</li>
+			<li>Anna's Archive</li>
+		</ul>
+	</div>
+
 	<h2>Dislikes</h2>
 	<div class="card justify-list">
 		<ul>
