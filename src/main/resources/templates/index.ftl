@@ -37,7 +37,6 @@
 		<ul>
 			<li>Animal: Cat</li>
 			<li>Artist: Icon of Coil</li>
-			<li>Browser: LibreWolf</li>
 			<li>Color: Purple</li>
 			<li>Language: Java</li>
 			<li>OS: Debian</li>
@@ -92,8 +91,11 @@
 	</div>
 
 	<center>
-		<p>Here is a picture of my beautiful cat:</p>
-		<img src="/static/images/cat.jpg" alt="My Cat" class="cat">
+		<h2>My Fastfetch</h2>
+		<img src="/static/images/fastfetch.png" alt="Debian" class="tiny-image">
+
+		<h2>My Beautiful Cat (Firefox)</h2>
+		<img src="/static/images/firefox.jpg" alt="Firefox" class="tiny-image">
 		<p style="margin-bottom: 2rem">yes... i own a blahaj</p>
 	</center>
 
