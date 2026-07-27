@@ -1,0 +1,25 @@
+---
+title: Bypassing FRP on a Pixel 4a
+date: 2026-07-27
+---
+
+If you've ever found a secondhand Android phone that demands a password even after you reset it, it has Factory Reset Protection, a feature introduced in newer versions of Android that seems to cause more e-waste than phone theft reduction. There are a lot of articles you can find about how to bypass it, but they usually unfortunately promote shady proprietary software or have outdated information.
+
+One of my favorite ways to get secondhand phones is to get them from the recycling bin at Target where people put batteries and ink cartridges. I found a Pixel 2, a Motorola phone (don't remember which one it was, my friend has it now), and a Pixel 4a. We were able to get custom ROMS working on all of these (unfortunately, we had to flash TrebleDroid to the Motorola.)
+
+The original owner left their email on the lock screen, and I tried contacting them, but they didn't respond. Therefore, I reset the phone, but it asked for the original password.
+
+Luckily, there's a website called vnROM that you can use to bypass it. The first step, as with most FRP bypasses, is to enable TalkBack, which is an accessibility feature that can help you open other apps and do stuff you're not supposed to.
+
+I found a few videos mentioning a dialer method that involved something to do with calling 911 and a patched one that had something to do with the Wi-Fi menu on Android 11. Since the phone is on Android 12 and the 911 method is obviously a bad idea, the following method worked for me:
+
+1. Enable TalkBack
+2. Use the dictation and tell it to open Google Assistant
+3. Let it take a moment to download it
+4. Tell Google Assistant to open Settings
+5. From settings, select apps
+6. Open Chrome
+7. Look up vnROM
+8. Click "open smart lock"
+
+From here, it will ask you to set a new password or pattern. I recommend choosing the pattern since it'll probably fail on the first try and you'll need to re-enter it a bunch of times before it works. If the menu crashes, just reopen it. It should let you finally set it after less than 10 attempts. Then, disconnect the phone from the Internet, disable Google Play Services, and reboot. It should ask you for the previous pattern and just type in the new one you set. From here, I was able to unlock the bootloader and flash LineageOS.
