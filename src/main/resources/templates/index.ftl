@@ -130,11 +130,7 @@
 
 	<!-- Web 2.0 Badges -->
 	<img src="/static/images/no_spam.gif" alt="No Spam" class="badge">
-	<a href="/donate">
-		<img src="/static/images/donate.png" alt="Donate" class="badge">
-	</a>
 	<img src="/static/images/get_firefox.gif" alt="Get Firefox" class="badge">
-	<img src="/static/images/pride.gif" alt="Pride" class="badge">
-	<img src="/static/images/no_discord.gif" alt="No Discord" class="badge">
 	<img src="/static/images/cookie_free.gif" alt="Cookie Free" class="badge">
+	<img src="/static/images/best_viewed_with_eyes.gif" alt="Best Viewed with Eyes" class="badge">
 </@base>

@@ -4,6 +4,24 @@
 	box-sizing: border-box;
 }
 
+nav ul {
+	/* center */
+	display: flex;
+	justify-content: center;
+
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+
+nav li a {
+	display: block;
+	color: white;
+	padding: 14px 16px;
+	text-decoration: none; /* hide underline */
+}
+
 body {
 	font-family: system-ui, -apple-system, sans-serif;
 	background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);

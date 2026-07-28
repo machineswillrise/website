@@ -56,14 +56,3 @@
 .blog-content p {
 	margin-bottom: 1rem;
 }
-
-.back-link {
-	display: inline-block;
-	margin-top: 2rem;
-	color: #4ecdc4;
-	text-decoration: none;
-}
-
-.back-link:hover {
-	text-decoration: underline;
-}
