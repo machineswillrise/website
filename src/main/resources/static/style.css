@@ -1,3 +1,9 @@
+@keyframes bgShift {
+	0%   { background-position: 0% 50%; }
+	50%  { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -24,7 +30,9 @@ nav li a {
 
 body {
 	font-family: system-ui, -apple-system, sans-serif;
-	background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+	background: linear-gradient(135deg, #0c0c26, #2f244e, #201f40);
+	background-size: 400% 400%;
+	animation: bgShift 30s ease infinite;
 	color: #eee;
 	min-height: 100vh;
 	line-height: 1.6;
