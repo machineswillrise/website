@@ -11,7 +11,6 @@
 	<div class="card">
 		<a href="https://github.com/machineswillrise">GitHub</a>
 		<a href="https://stackoverflow.com/users/32795609/machineswillrise">Stack Overflow</a>
-		<a href="/blog">Blog</a>
 	</div>
 
 	<h2>Projects</h2>
@@ -50,6 +49,7 @@
 		<ul>
 			<li>C</li>
 			<li>C++ (but no obscure features)</li>
+			<li>Rust</li>
 			<li>Raku</li>
 			<li>Biking</li>
 			<li>LineageOS</li>
@@ -59,43 +59,38 @@
 			<li>Piracy</li>
 			<li>Soulseek</li>
 			<li>Anna's Archive</li>
+			<li>Electronic repair</li>
+			<li>TUIs</li>
+			<li>Doomscrolling wikipedia</li>
+			<li>Catppuccin theme</li>
+			<li>Alpine Linux</li>
+			<li>Old computers</li>
+			<li>SDL and LWJGL</li>
 		</ul>
 	</div>
 
 	<h2>Dislikes</h2>
 	<div class="card justify-list">
+		<p>Dislike does <b>NOT</b> mean hate. I love dogs and you as well ❤️</p>
 		<ul>
-			<li>Age Verification</li>
-			<li>Anti-Cheat Software</li>
-			<li>Cities</li>
-			<li>Clippy Profile Pictures</li>
-			<li>Discord</li>
 			<li>Dogs</li>
-			<li>DuckDuckGo</li>
-			<li>Face Recognition</li>
-			<li>Flock Cameras</li>
-			<li>Gun Control</li>
-			<li>Kubernetes</li>
-			<li>Linux Mint</li>
-			<li>Mainstream Music</li>
-			<li>Mechanical Keyboards</li>
-			<li>PayPal</li>
-			<li>Samsung Phones</li>
-			<li>Solarized Theme</li>
-			<li>Steam</li>
-			<li>Summer</li>
-			<li>TVs</li>
-			<li>Visual Studio</li>
-			<li>Wayland</li>
+			<li>JetBrains</li>
+			<li>Gun control</li>
+			<li>Flock cameras</li>
+			<li>Mainstream music</li>
+			<li>Curved monitors</li>
+			<li>Apple</li>
+			<li>Windows</li>
+			<li>Google Chrome</li>
 		</ul>
 	</div>
 
 	<center>
 		<h2>My Fastfetch</h2>
-		<img src="/static/images/fastfetch.png" alt="Debian" class="tiny-image">
+		<img src="/static/images/index/fastfetch.png" alt="Debian" class="tiny-image">
 
 		<h2>My Beautiful Cat (Firefox)</h2>
-		<img src="/static/images/firefox.jpg" alt="Firefox" class="tiny-image">
+		<img src="/static/images/index/firefox.jpg" alt="Firefox" class="tiny-image">
 		<p style="margin-bottom: 2rem">yes... i own a blahaj</p>
 	</center>
 
@@ -128,9 +123,11 @@
 		<a href="/contact-misc">Other contact methods</a>
 	</form>
 
+	<p style="margin-bottom: 1rem">How DARE you be accessing this through a desktop browser instead of our bloated and proprietary app.</p>
+
 	<!-- Web 2.0 Badges -->
-	<img src="/static/images/no_spam.gif" alt="No Spam" class="badge">
-	<img src="/static/images/get_firefox.gif" alt="Get Firefox" class="badge">
-	<img src="/static/images/cookie_free.gif" alt="Cookie Free" class="badge">
-	<img src="/static/images/best_viewed_with_eyes.gif" alt="Best Viewed with Eyes" class="badge">
+	<img src="/static/images/index/badges/no_spam.gif" alt="No Spam" class="badge">
+	<img src="/static/images/index/badges/get_firefox.gif" alt="Get Firefox" class="badge">
+	<img src="/static/images/index/badges/cookie_free.gif" alt="Cookie Free" class="badge">
+	<img src="/static/images/index/badges/best_viewed_with_eyes.gif" alt="Best Viewed with Eyes" class="badge">
 </@base>
