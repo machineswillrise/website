@@ -74,14 +74,13 @@
 		<p>Dislike does <b>NOT</b> mean hate. I love dogs and you as well ❤️</p>
 		<ul>
 			<li>Dogs</li>
-			<li>JetBrains</li>
+			<li>Apple</li>
 			<li>Gun control</li>
 			<li>Flock cameras</li>
 			<li>Mainstream music</li>
 			<li>Curved monitors</li>
-			<li>Apple</li>
-			<li>Windows</li>
-			<li>Google Chrome</li>
+			<li>Godot and Unity</li>
+			<li>Being around people</li>
 		</ul>
 	</div>
 
