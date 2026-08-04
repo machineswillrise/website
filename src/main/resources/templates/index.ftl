@@ -16,7 +16,7 @@
 	<h2>Projects</h2>
 	<div class="card">
 		<a href="https://github.com/machineswillrise/jagent">JAgent</a>
-		<a href="https://github.com/machineswillrise/javawm">JavaWM (Not complete yet)</a>
+		<a href="https://github.com/machineswillrise/fruit-game">Fruit Game</a>
 		<a href="https://github.com/machineswillrise/website">Website</a>
 		<a href="https://github.com/machineswillrise/misc-school-stuff">Misc School Stuff</a>
 		<a href="https://github.com/machineswillrise/dotfiles">Dotfiles</a>
