@@ -71,7 +71,6 @@
 
 	<h2>Dislikes</h2>
 	<div class="card justify-list">
-		<p>Dislike does <b>NOT</b> mean hate. I love dogs and you as well ❤️</p>
 		<ul>
 			<li>Dogs</li>
 			<li>Apple</li>
@@ -80,7 +79,7 @@
 			<li>Mainstream music</li>
 			<li>Curved monitors</li>
 			<li>Godot and Unity</li>
-			<li>Being around people</li>
+			<li>Crowded places</li>
 		</ul>
 	</div>
 
